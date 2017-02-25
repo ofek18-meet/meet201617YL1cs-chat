@@ -109,6 +109,9 @@ class View:
         :param username: the name of this chat user
         :param partner_name: the name of the user you are chatting with
         '''
+        self.username=username
+        self.partner_name=partner_name
+        self.my_client=Client()
         ###
         #Store the username and partner_name into the instance.
         ###
@@ -136,7 +139,8 @@ class View:
         #You can use the clear() and write() methods to erase
         #and write messages for each
         ###
-
+        self.turtle=turtle.clone()
+        
         ###
         #Create a TextBox instance and a SendButton instance and
         #Store them inside of this instance
@@ -150,6 +154,11 @@ class View:
         ###
 
     def send_msg(self):
+        self.my_client.send(self.TextBox.new_msg)
+        self.msg_queue.insert(0,self.TextBox.new_msg)
+        self.TextBox.writer.clear()
+        self.display_msg()
+        
         '''
         You should implement this method.  It should call the
         send() method of the Client object stored in this View
@@ -159,10 +168,10 @@ class View:
         It should call self.display_msg() to cause the message
         display to be updated.
         '''
-        pass
+       
 
     def get_msg(self):
-        return self.textbox.get_msg()
+        return self.TextBox.get_msg()
 
     def setup_listeners(self):
         '''
@@ -178,13 +187,15 @@ class View:
         pass
 
     def msg_received(self,msg):
+
+        
         '''
         This method is called when a new message is received.
         It should update the log (queue) of messages, and cause
         the view of the messages to be updated in the display.
 
         :param msg: a string containing the message received
-                    - this should be displayed on the screen
+                    - this should be displayed on the screen 
         '''
         print(msg) #Debug - print message
         show_this_msg=self.partner_name+' says:\r'+ msg
@@ -192,13 +203,18 @@ class View:
         #or append (to put at the end).
         #
         #Then, call the display_msg method to update the display
-
+        self.msg_queue.insert(0,msg)
+        self.display_msg()
+        
     def display_msg(self):
+        self.turtle.clear()
+        self.turtle.write(self.msg_queue[0])
+        
         '''
         This method should update the messages displayed in the screen.
         You can get the messages you want from self.msg_queue
         '''
-        pass
+        
 ##############################################################
 ##############################################################
 
