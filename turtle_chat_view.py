@@ -58,7 +58,15 @@ class TextBox(TextInput):
 #####################################################################################
 #                                  SendButton                                       #
 #####################################################################################
+class SendButton(Button):
+    def fun
+
+
+
+
+
 #Make a class called SendButton, which will be a subclass of Button.
+
 #Button is an abstract class with one abstract method: fun.
 #fun gets called whenever the button is clicked.  It's jobs will be to
 #
