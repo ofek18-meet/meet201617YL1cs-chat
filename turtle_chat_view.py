@@ -18,12 +18,16 @@ from  turtle_chat_widgets import TextInput
 #####################################################################################
 class TextBox(TextInput):
     def draw_box(self):
-        turtle.pendown()
-        turtle.goto(0,self.width)
-        turtle.goto(self.height,0)
-        turtle.goto(0,-self.width)
-        turtle.goto(-self.height,0)
-        turtle.penup()
+        draw=turtle.clone()
+        draw.ht()
+        draw.penup()
+        draw.goto(-100,0)
+        draw.pendown()
+        draw.goto(-100,100)
+        draw.goto(100,100)
+        draw.goto(100,0)
+        draw.goto(-self.height,0)
+        draw.penup()
     def write_msg(self):
         self.writer.clear()
         self.writer.write(self.new_msg)
@@ -61,7 +65,7 @@ class TextBox(TextInput):
 #####################################################################################
 class SendButton(Button):
     def __init__(self,view):
-        super(SendButton,self).__init__(my_turtle=None,shape=None,pos=(0,0))
+        super(SendButton,self).__init__(my_turtle=None,shape=None,pos=(0,-80))
         self.view=view
     def fun(self,x=None,y=None):
         self.view.send_msg()
@@ -139,6 +143,7 @@ class View:
         #You can use the clear() and write() methods to erase
         #and write messages for each
         ###
+        
         self.turtle=turtle.clone()
         
         ###
