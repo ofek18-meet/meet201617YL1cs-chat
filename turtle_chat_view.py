@@ -145,6 +145,10 @@ class View:
         ###
         
         self.turtle=turtle.clone()
+        self.msg2=turtle.clone()
+        self.msg3=turtle.clone()
+        self.msg4=turtle.clone()
+        self.msg5=turtle.clone()
         
         ###
         #Create a TextBox instance and a SendButton instance and
@@ -161,7 +165,7 @@ class View:
     def send_msg(self):
         self.my_client.send(self.TextBox.new_msg)
         self.msg_queue.insert(0,self.TextBox.new_msg)
-        self.TextBox.writer.clear()
+        self.TextBox.clear_msg()
         self.display_msg()
         
         '''
@@ -212,8 +216,12 @@ class View:
         self.display_msg()
         
     def display_msg(self):
+        self.msg2.hideturtle()
         self.turtle.clear()
         self.turtle.write(self.msg_queue[0])
+        self.msg2.clear()
+        self.msg2.write(self.msg_queue[1])
+        self.msg2.goto(0,10)
         
         '''
         This method should update the messages displayed in the screen.
